@@ -4,7 +4,7 @@ public class SneckAndLadder {
 
 	public static void main(String[] args) {
 		final int Play = 1;
-		System.out.println("Game Start With Position Zero:");
+		int die = (int) (Math.floor(Math.random() * 10) % 6) + 1;
+		System.out.println("Player Get Number = " + die);
 	}
-
 }
