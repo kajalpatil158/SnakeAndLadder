@@ -9,15 +9,17 @@ public class SneckAndLadder {
 
 	public static void main(String[] args) {
 		// Computation
-		int playerCurrentPosition = START_POINT;
-		for (int noOfTimesDiceRolled = 1; playerCurrentPosition >= 0; noOfTimesDiceRolled++) {
+		int currentPositionOfPlayer = START_POINT;
+		for (int noOfTimesRoll = 1; currentPositionOfPlayer < 100; noOfTimesRoll++) {
 			int diceRoll = (int) (Math.floor(Math.random() * 10) % 6) + 1;
 			System.out.println("You rolled: " + diceRoll);
-			playerCurrentPosition = PlayerMovement(diceRoll, playerCurrentPosition);
-			System.out.println("Your position Number is : " + playerCurrentPosition);
-			if (playerCurrentPosition >= 100)
+			currentPositionOfPlayer = PlayerMovement(diceRoll, currentPositionOfPlayer);
+			System.out.println("Your position Number is : " + currentPositionOfPlayer);
+			if (currentPositionOfPlayer >= 100) {
 				System.out.println("Game Over");
-			break;
+				break;
+			}
+
 		}
 	}
 
@@ -39,7 +41,8 @@ public class SneckAndLadder {
 			}
 		case LADDER:
 			System.out.println("You Got Ladder");
-			postionPlayer = postionPlayer + numbRolled;
+			if (postionPlayer + numbRolled <= 100)
+				postionPlayer = postionPlayer + numbRolled;
 			break;
 		}
 		return postionPlayer;
