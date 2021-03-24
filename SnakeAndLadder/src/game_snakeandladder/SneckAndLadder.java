@@ -10,41 +10,29 @@ public class SneckAndLadder {
 	public static void main(String[] args) {
 		// Computation
 		int currentPositionOfPlayer = START_POINT;
-		for (int noOfTimesRoll = 1; currentPositionOfPlayer < 100; noOfTimesRoll++) {
+		int moves = 0;
+		System.out.println("Well Come In Snake And Ladder Game");
+		while (currentPositionOfPlayer != End_POINT) {
 			int diceRoll = (int) (Math.floor(Math.random() * 10) % 6) + 1;
 			System.out.println("You rolled: " + diceRoll);
-			currentPositionOfPlayer = PlayerMovement(diceRoll, currentPositionOfPlayer);
-			System.out.println("Your position Number is : " + currentPositionOfPlayer);
-			if (currentPositionOfPlayer >= 100) {
-				System.out.println("Game Over");
-				break;
-			}
-
-		}
-	}
-
-	// Check condition by switch case
-	static int PlayerMovement(int numbRolled, int postionPlayer) {
-		int move = (int) Math.floor(Math.random() * 10) % 3;
-		switch (move) {
-		case NO_PLAY:
-			System.out.println("No Play");
-			break;
-		case SNAKE:
-			System.out.println("You Are Bitten by Snake");
-			if (postionPlayer - numbRolled >= 0) {
-				postionPlayer = postionPlayer - numbRolled;
-				break;
+			int move = (int) Math.floor(Math.random() * 10) % 3;
+			if (move == NO_PLAY) {
+				System.out.println("No Play");
+			} else if (move == LADDER) {
+				System.out.println("You Got Ladder");
+				currentPositionOfPlayer += diceRoll;
+				if (currentPositionOfPlayer > End_POINT) {
+					currentPositionOfPlayer -= diceRoll;
+				}
 			} else {
-				postionPlayer = START_POINT;
-				break;
+				currentPositionOfPlayer -= diceRoll;
+				if (currentPositionOfPlayer < START_POINT) {
+					currentPositionOfPlayer = START_POINT;
+				}
 			}
-		case LADDER:
-			System.out.println("You Got Ladder");
-			if (postionPlayer + numbRolled <= 100)
-				postionPlayer = postionPlayer + numbRolled;
-			break;
+			moves++;
+			System.out.println("You Are At Position :" + currentPositionOfPlayer);
 		}
-		return postionPlayer;
+		System.out.println("You reached exact winning position in : " + moves + " moves");
 	}
 }
